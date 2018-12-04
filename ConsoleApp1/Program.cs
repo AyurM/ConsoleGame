@@ -4,7 +4,7 @@ namespace ConsoleGame {
     public class Program {
 
         static Random rnd = new Random();
-        static int width = 35, height = 20;
+        static int width = 30, height = 15;
 
         //Координаты объектов на уровне
         static int px = 2, py = 2;
@@ -143,9 +143,10 @@ namespace ConsoleGame {
         }
 
         static void EnemyTurn() {
-            //игрок ходит в 2 раза чаще
+            //противник ходит в 2 раза реже
             if(turn % 2 == 0) {
-                int direction = rnd.Next(1, 5);
+                //либо сходить в случайном направлении, либо остаться на месте
+                int direction = rnd.Next(1, 6);
                 switch (direction) {
                     case 1:
                         if (ex < width - 1)
@@ -213,9 +214,9 @@ namespace ConsoleGame {
             Console.Write(hp + " ");
             Console.SetCursorPosition(58, 2);
             Console.Write(ehp + " ");
-            Console.SetCursorPosition(2, 6 + (combatTurn - 1) * 2);
+            Console.SetCursorPosition(2, 6 + (combatTurn - 1) * 3);
             Console.WriteLine(playerDmg > 0 ? "Вы нанесли " + playerDmg + " урона!" : "Вы промахнулись!");
-            Console.SetCursorPosition(2, 7 + (combatTurn - 1) * 2);
+            Console.SetCursorPosition(2, 7 + (combatTurn - 1) * 3);
             Console.WriteLine(enemyDmg > 0 ? "Враг нанес Вам " + enemyDmg + " урона!" : "Враг промахнулся по Вам!");
         }
 
@@ -243,7 +244,7 @@ namespace ConsoleGame {
             Console.WriteLine("\t\tX\t\t\t\t\tO");
             Console.WriteLine();
             Console.WriteLine("\tЗдоровье: " + hp + "\t\t\t\tЗдоровье: " + ehp);
-            Console.WriteLine("\tМеткость: " + pChanceToHit + "\t\t\t\tМеткость: " + eChanceToHit);
+            Console.WriteLine("\tМеткость: " + pChanceToHit + "%" + "\t\t\t\tМеткость: " + eChanceToHit + "%");
             Console.WriteLine("\tУрон: " + pdmgMin + " - " + pdmgMax + "\t\t\t\tУрон: " + edmgMin + " - " + edmgMax);
             Console.WriteLine();
         }
